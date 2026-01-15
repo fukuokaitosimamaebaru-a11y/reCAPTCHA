@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>reCAPTCHA後にMP3ループ再生</title>
+
+    <!-- reCAPTCHA 読み込み -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</head>
+<body>
+
+<h2>ロボットではないことを確認してください</h2>
+
+<!-- reCAPTCHAボタン -->
+<button class="g-recaptcha"
+        data-sitekey="6LeUZkssAAAAAP6h91Yqa6J7jNogQkYReXDR4Upf"
+        data-callback="onVerified">
+        確認する
+</button>
+
+<br><br>
+
+<!-- MP3（無限ループ） -->
+<audio id="player" src="yourfile.mp3" loop></audio>
+
+<script>
+function onVerified(token) {
+    const audio = document.getElementById("player");
+
+    audio.currentTime = 0; // 最初から
+    audio.play().then(() => {
+        alert("確認完了！MP3をループ再生します。");
+    }).catch(() => {
+        alert("自動再生がブロックされました。画面をタップして再生してください。");
+    });
+}
+</script>
+
+</body>
+</html>
